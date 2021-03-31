@@ -278,7 +278,7 @@ for sku, url in zip(skus, urls):
     # data rows of csv file 
     rows.append(info)
     j = j + 1
-    print(j+'. Added SKU: '+sku)
+    print(j,'. Added SKU: ',sku)
 
     # end of loop --------------------------------------------------------------
         
@@ -289,7 +289,7 @@ with open(filename, 'a') as csvfile:
     
     # writing the data rows 
     csvwriter.writerows(rows)
-    print('CSV file updated! added SKU: '+sku)
+    print("CSV file updated!")
 
 # sanitise csv
 # utf-8 encoding not supported on windows
