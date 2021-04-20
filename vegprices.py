@@ -51,6 +51,9 @@ texts = driver.find_elements_by_xpath('//div[@class="catBox__title"]')
 for text in texts:
     catnames.append(text.get_attribute('innerHTML'))
 
+# removing home essentials and delivery categories
+caturls = caturls[1:]
+catnames = catnames[1:]
 
 # category loop
 for catname,caturl in zip(catnames, caturls):
@@ -58,17 +61,16 @@ for catname,caturl in zip(catnames, caturls):
 
     print("----------------- opened category: ", catname, "-----------------\n")
 
-    # fetching URLs, names, and categories
-    urls = []
+    # fetching names, and categories
     anchors = driver.find_elements_by_xpath('//h3[@class="product__title h6"]/a')
     for anchor in anchors:
-        urls.append(anchor.get_attribute('href'))
         names.append(anchor.text)
         categories.append(catname)
 
-    # fetching skus
+    # fetching URLs and skus
     codes = driver.find_elements_by_xpath('//div[@class="product__sku"]/a')
     for code in codes:
+        urls.append(code.get_attribute('href'))
         skus.append(code.text)
         print("added product: ", code.text, " \n")
 
