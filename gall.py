@@ -805,10 +805,13 @@ for (sku, site) in zip(skus, links):
             print("Error in file, skipping...")
             continue
         fn = os.path.join(imgpath, fn)
-        print(fn, end="\n")
 
         if not fn:
             print("Regex didn't match with the url: {}".format(url))
+            continue
+        if 'logo.png' in fn:
+            continue
+        elif('_THUMBNAIL' in fn):
             continue
         with open(fn, 'wb') as f:
             if 'http' not in url:
@@ -818,3 +821,5 @@ for (sku, site) in zip(skus, links):
                 url = '{}{}'.format(site, url)
             response = requests.get(url)
             f.write(response.content)
+        # print successfully downloaded images only
+        print(fn, end="\n")
